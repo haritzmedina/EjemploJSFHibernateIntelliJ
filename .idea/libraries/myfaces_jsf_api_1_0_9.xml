@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="myfaces-jsf-api-1.0.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/myfaces-jsf-api-1.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/myfaces-1.0.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/myfaces-api-1.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

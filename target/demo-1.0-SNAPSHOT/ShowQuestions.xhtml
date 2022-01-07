@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<f:view>
+		<h:head>
+			<title>Bets JSF</title>
+		</h:head>
+		<h:body>
+			<h:form>
+			<h3>BUSQUEDA DE PREGUNTAS</h3>
+
+			<h4>Seleccione la fecha</h4>
+			<p:calendar id="data" navigator="true" mode="inline"
+				onselect="showEvents()">
+				<p:ajax event="dateSelect"
+					listener="#{showQuestionsBean.getEventsOnDate}"
+					update="@(.eventTable, .questionTable)"></p:ajax>
+			</p:calendar>
+
+			<h4>Evento seleccionado</h4>
+			<p:dataTable styleClass="eventTable" value="#{showQuestionsBean.events}"
+				var="event" selectionMode="single"
+				selection="#{showQuestionsBean.selectedEvent}" border="1"
+				rowKey="#{event.eventNumber}">
+				<p:ajax event="rowSelect"
+					listener="#{showQuestionsBean.onEventSelect}" update="@(.questionTable)"></p:ajax>
+				<f:facet name="header">Eventos:</f:facet>
+				<p:column headerText="Numero de evento">#{event.eventNumber}
+				</p:column>
+				<p:column headerText="Evento">#{event.description}
+				</p:column>
+				<p:column headerText="Fecha del evento">#{event.eventDate}</p:column>
+			</p:dataTable>
+
+			<h4>Pregunta del evento seleccionado</h4>
+			<p:dataTable styleClass="questionTable" value="#{showQuestionsBean.question}"
+				var="question" border="1"
+				rowKey="#{event.eventNumber}">
+				<f:facet name="header">Questions:</f:facet>
+				<p:column headerText="Numero de pregunta">#{question.questionNumber}</p:column>
+				<p:column headerText="Pregunta">#{question.question}</p:column>
+				<p:column headerText="Apuesta minima">#{question.betMinimum}</p:column>
+				<p:column headerText="Resultado del evento">#{question.result}</p:column>
+
+			</p:dataTable>
+
+			<p><h:button value="Back" outcome="Main.xhtml" /></p>
+		</h:form>
+		</h:body>
+	</f:view>
+</ui:composition>
+</html>
